@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 int main(){
-	printf("Hello,SFC");
-	return 0;
+    //use printf() function to print out the string "Hello, SFC"
+    printf("Hello, SFC");
+    return 0;
 }
