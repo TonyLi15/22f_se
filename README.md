@@ -7,3 +7,13 @@ A program which prints out "Hello, SFC" after executing.
 
 ### list.c
 A program which creates a linked list which contains 100 elementsm (integers from 1 to 100) and prints out all elements horizontally with spaces between each of them after executing.
+
+## 2_oct14
+### bs.c
+_To be updated_
+
+### hash.c
+_To be updated_
+
+## 3_oct21
+_To be updated_
