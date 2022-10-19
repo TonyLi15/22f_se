@@ -1,77 +1,105 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+
+//define the max value of the sorted list that will conduct hash search
+#define MAX_VALUE 10000
 
 //define the bucket size which is 2 times of the list that will conduct hash search
-#define BUCKET_SIZE 20000000
+#define BUCKET_SIZE (2 * MAX_VALUE)
+
+//define delta size for open addressing
+#define DELTA 2
 
 //create the array of hashtable which has the size of previously defined "BUCKET_SIZE"
 int hashtable[BUCKET_SIZE];
 
-//define search function
-int search(int key){
+//define the counter which counts the step of searching
+int counter;
+
+//define hashsearch function
+int hashsearch(int key){
     int pos,t;
+    
+    //set counter to 1
+    counter = 1;
+    
+    //set the index of key in hashtable by definition
     pos = key % BUCKET_SIZE;
     t = pos;
+    
+    //when there is a collision, use open addressing and increment the counter
     while(hashtable[t]!= key && hashtable[t]!= -1){
-	t = (t + 1) % BUCKET_SIZE;
-	if(pos == t){
-	    return -1;
-	}
+        t = (t + DELTA) % BUCKET_SIZE;
+        counter++;
     }
+    
+    //return the value in hashtable
     if(hashtable[t] == -1)
-	return -1;
+        return -1;
     else
-	return t;
+        return t;
+    
 }
 
+//define createhash function which builds hash index for key value
 void createhash(int key){
     int pos,t;
+    
+    //set the index of key in hashtable by definition
     pos = key % BUCKET_SIZE;
     t = pos;
+    
+    //when there is a collision, use open addressing 
     while(hashtable[t]!= -1){
-	t = (t + 1) % BUCKET_SIZE0;
-	if(pos == t){
-	    return;
-	}
+        t = (t + DELTA) % BUCKET_SIZE;
     }
+    
+    //set the corresponding index in hashtable for hash search for key
     hashtable[t] = key;
 }
 
 int main(void){
-    
-    //clock_t start_t, end_t, total_t;
-    
-    
-    int i,j,t;
+    //define variables that will be used later
+    int i,t;
     int val = 0;
+    
+    //initialize every index of hashtable to -1
     for(i = 0; i < BUCKET_SIZE; i++)
-	hashtable[i] = -1;
-    srand(time(NULL));
+        hashtable[i] = -1;
+    
+    
+    //create a sorted list contains all integers from 1 to max value defined above
     i = 0;
-    while(i != 10000000){
-	int num = rand() % 10 + 1;
-	val += num;
-	t = val;
-	createhash(t);
-	i++;
-    }
-    
-    //start_t = clock();
-    //printf("Begin of the search, start_t = %ld\n", start_t);
-    
-    
-    for(int h = 0; h < 10000000; h++){
-	if (hashtable[h]!= -1){
-	    search(hashtable[h]);
-	    printf("The index of number \"%d\" is %d\n",hashtable[h],h);
-	}
+    while(i != MAX_VALUE){
+        val++;
+        t = val;
+        createhash(t);
+        i++;
     }
     
     /*
-    end_t = clock();
-    printf("End of search, end_t = %ld\n", end_t);
-    total_t = ((double)(end_t - start_t)) / CLOCKS_PER_SEC;
-    printf("Total time is %lu seconds\n", total_t);
+    conduct hash search for every indexes in the list and print out the result
+    for(int h = 0; h < MAX_VALUE; h++){
+        if (hashtable[h]!= -1){
+            hashsearch(hashtable[h]);
+            printf("The index of number \"%d\" is %d, step = %d\n",hashtable[h],h, counter);
+        }
+    }
     */
+    
+    //store user input as the key
+    int key;
+    printf("key? ");
+    scanf("%d", &key);
+    
+    //if user input is not in the range, then abort
+    if (key < 1 || key > MAX_VALUE){
+        printf("Out of range");
+        exit(0);
+    }
+    
+    //conduct hash search for the key, and print out the step
+    hashsearch(hashtable[key]);
+    //printf("The index of number \"%d\" is %d, step = %d\n",hashtable[key],key, counter);
+    printf("Found (step = %d)\n", counter); 
 }
