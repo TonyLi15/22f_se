@@ -24,4 +24,7 @@ A program which creates an array containing MAX_VALUE of random integer from 1 t
 * Count sort
 * I can't believe it can sort
 
-And user can choose to print out the array that before sorting, after sorting, and the time the algorithm costs (Comment out the corresponding code if there is no need to print out)
+And user can choose:
+
+* which algorithm for sorting (comment out other sorting algorithms)
+* print out the array that before sorting, after sorting, and the time the algorithm costs (Comment out the corresponding code if there is no need to print out)
