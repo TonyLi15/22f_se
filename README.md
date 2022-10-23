@@ -18,9 +18,10 @@ A program which creates an array containing all integers from 1 to MAX_VALUE des
 ## 3_oct21
 ### sort.c
 A program which creates an array containing MAX_VALUE of random integer from 1 to MAX_VALUE designated, and conduct following search alrogithms:
-#### Insertion sort
-#### Quick sort
-#### Count sort
-#### I can't believe it can sort
+
+* Insertion sort
+* Quick sort
+* Count sort
+* I can't believe it can sort
 
 And user can choose to print out the array that before sorting, after sorting, and the time the algorithm costs (Comment out the corresponding code if there is no need to print out)
