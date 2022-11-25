@@ -2,6 +2,8 @@
 #include <vector>
 #include <sys/time.h>
 
+int middle = (int)ceil(N/2);
+
 struct timeval cur_time(void){
 	struct timeval t;
 	gettimeofday(&t, NULL);
@@ -11,21 +13,20 @@ struct timeval cur_time(void){
 void print_tree_core(NODE *n){
 	printf("["); 
 	for (int i = 0; i < n->nkey; i++) {
-		if (!n->isLeaf) print_tree_core(n->chi[i]);
-		printf("%d", n->key[i]);
+		if (!n->isLeaf) print_tree_core(n->chi[i]); 
+		printf("%d", n->key[i]); 
 		if (i != n->nkey-1 && n->isLeaf) putchar(' ');
 	}
 	if (!n->isLeaf) print_tree_core(n->chi[n->nkey]);
 	printf("]");
 }
 
-void print_tree(NODE *node){
+void print_tree(NODE *node) {
 	print_tree_core(node);
-	printf("\n"); 
-	fflush(stdout);
+	printf("\n"); fflush(stdout);
 }
 
-NODE * find_leaf(NODE *node, int key){
+NODE *find_leaf(NODE *node, int key){
 	int kid;
 
 	if (node->isLeaf) return node;
@@ -42,7 +43,7 @@ NODE *insert_in_leaf(NODE *leaf, int key, DATA *data){
 		for (i = leaf->nkey; i > 0; i--) {
 			leaf->chi[i] = leaf->chi[i-1] ;
 			leaf->key[i] = leaf->key[i-1] ;
-		}
+		} 
 		leaf->key[0] = key;
 		leaf->chi[0] = (NODE *)data;
 	}
@@ -54,11 +55,13 @@ NODE *insert_in_leaf(NODE *leaf, int key, DATA *data){
 			leaf->chi[j] = leaf->chi[j-1] ;
 			leaf->key[j] = leaf->key[j-1] ;
 		}
-	//Insert (Assignment for 10.28)
-	leaf->key[i] = key;
-	leaf->chi[i] = (NODE *)data;
+
+		//Assignment 1: leaf insert
+		leaf->key[i] = key;
+		leaf->chi[i] = (NODE *)data;
 	}
 	leaf->nkey++;
+
 	return leaf;
 }
 
@@ -68,12 +71,13 @@ NODE *alloc_leaf(NODE *parent){
 	node->isLeaf = true;
 	node->parent = parent;
 	node->nkey = 0;
+
 	return node;
 }
 
-void insert(int key, DATA *data)
-{
+void insert(int key, DATA *data){
 	NODE *leaf;
+
 	if (Root == NULL) {
 		leaf = alloc_leaf(NULL);
 		Root = leaf;
@@ -84,8 +88,8 @@ void insert(int key, DATA *data)
 	if (leaf->nkey < (N-1)) {
 		insert_in_leaf(leaf, key, data);
 	}
-	else { 
-		// Leaf Split
+	else {
+		//Further codes for Leaf split
 	}
 }
 
@@ -95,14 +99,18 @@ void init_root(void){
 
 int interactive(){
 	int key;
+
 	std::cout << "Key: ";
 	std::cin >> key;
+
 	return key;
 }
 
 int main(int argc, char *argv[]){
 	struct timeval begin, end;
+
 	init_root();
+
 	printf("-----Insert-----\n");
 	begin = cur_time();
 	while (true) {
@@ -110,5 +118,6 @@ int main(int argc, char *argv[]){
 		print_tree(Root);
 	}
 	end = cur_time();
+
 	return 0;
 }
