@@ -30,7 +30,15 @@ And user can choose:
 * print out the array that before sorting, after sorting, and the time the algorithm costs (Comment out the corresponding code if there is no need to print out)
 
 ## 4_oct28
-B-plus trees
+B-plus tree
+* Leaf Insert
+* Leaf Split
+* Internal Split
 
 ## 8_dec2
 Counters
+* Non-lock
+* Pthread lock (mutex)
+* TAS
+* TTAS
+* Atomic fetch and add
