@@ -30,5 +30,7 @@ And user can choose:
 * print out the array that before sorting, after sorting, and the time the algorithm costs (Comment out the corresponding code if there is no need to print out)
 
 ## 4_oct28
-### bptree.c
-*To Be Updated*
+B-plus trees
+
+## 8_dec2
+Counters
