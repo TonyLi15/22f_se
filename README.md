@@ -42,3 +42,8 @@ Counters
 * TAS
 * TTAS
 * Atomic fetch and add
+
+## 9_dec9
+2-phase Locking : 10M data w/ B-plus tree
+* Search (Read)
+* Update (Write)
