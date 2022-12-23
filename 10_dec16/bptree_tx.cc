@@ -360,7 +360,7 @@ void update_data(DATA *data){
 	}
 }
 
-void read (){
+void read(){
 	int a = rand() % SIZE_DATA;
 	search_core(Key_vector[a]);
 	printf("I searched data's %d Item %d\n", a, Key_vector[a]);
@@ -379,7 +379,7 @@ void *worker_rd (void *args){
 		read();
 		pthread_rwlock_unlock(&_lock);
 	}
-	
+	return NULL;	
 }
 
 void *worker_rdwr (void *args){
@@ -401,6 +401,7 @@ void *worker_rdwr (void *args){
 			pthread_rwlock_unlock(&_lock);
 		}
 	}
+	return NULL;
 }
 
 
